@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Open console</h1>
+
+<script>
+
+    function show(list) {
+        var curr = list;
+        while(curr !== null) {
+            console.log(curr.e);
+            curr = curr.next;
+        }
+    }
+
+    function reverseLList(n, prev) {
+        var nodes = Object.assign({}, n);
+        if ( !nodes ) {
+            return false;
+        }
+
+        if ( !nodes.next && prev ) {
+            nodes.next = prev;
+            return Object.assign({},nodes);
+        } else if ( !nodes.next && !prev ) {
+            return false;
+        }
+
+        var prevNode,
+                currNode,
+                restNodes;
+
+        prevNode = prev || null;
+        currNode = nodes;
+
+        restNodes = currNode.next;
+
+        currNode.next = prevNode;
+
+        prevNode = currNode;
+        currNode = restNodes;
+
+        reverseLList(currNode, prevNode);
+    }
+</script>
+</body>
+</html>
