@@ -54,11 +54,29 @@ function remove(item) {
 	}
 }
 
-// var linkedList = new LList();
-// linkedList.insert('CJ', 'head');
-// linkedList.insert('QQ', 'CJ');
-// linkedList.insert('cqf', 'QQ');
-// linkedList.display();
+var linkedList = new LList();
+linkedList.insert('CJ', 'head');
+linkedList.insert('QQ', 'CJ');
+linkedList.insert('cqf', 'QQ');
+linkedList.display();
 
 // Reverse a linked list
+function reverseLList (head) {
+	var cur = head,
+		next;
 
+	head = null;
+	while(cur) {
+		next = cur.next;
+		cur.next = head;
+
+		if(next) {
+			head = cur;
+			cur = next;
+		} else {
+			return cur;
+		}
+	}
+
+	return null;
+}
