@@ -75,3 +75,20 @@ function reverse(LinkedList) {
 
 	return null;
 }
+
+// linked list length function
+function getLength(LinkedList) {
+	var curNode = LinkedList;
+
+	if(curNode === null) {
+		return 1;
+	}
+
+	var count = 1;
+
+	while(curNode.next !== null) {
+		count++;
+		curNode = curNode.next;
+	}
+	return count;
+}
