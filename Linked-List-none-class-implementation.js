@@ -55,6 +55,23 @@ function remove(LinkedList, item) {
 	}
 }
 
+// linked list length function
+function getLength(LinkedList) {
+	var curNode = LinkedList;
+
+	if(curNode === null) {
+		return 1;
+	}
+
+	var count = 1;
+
+	while(curNode.next !== null) {
+		count++;
+		curNode = curNode.next;
+	}
+	return count;
+}
+
 // reverse function
 function reverse(LinkedList) {
 	var cur = LinkedList;
@@ -74,21 +91,4 @@ function reverse(LinkedList) {
 	}
 
 	return null;
-}
-
-// linked list length function
-function getLength(LinkedList) {
-	var curNode = LinkedList;
-
-	if(curNode === null) {
-		return 1;
-	}
-
-	var count = 1;
-
-	while(curNode.next !== null) {
-		count++;
-		curNode = curNode.next;
-	}
-	return count;
 }
