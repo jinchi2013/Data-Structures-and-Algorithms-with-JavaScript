@@ -54,3 +54,24 @@ function remove(LinkedList, item) {
 		prevNode.next = prevNode.next.next;
 	}
 }
+
+// reverse function
+function reverse(LinkedList) {
+	var cur = LinkedList;
+	var head = null;
+	var next;
+
+	while (cur) {
+		next = cur.next;
+		cur.next = head;
+
+		if(next) {
+			head = cur;
+			cur = cur.next;
+		} else {
+			return cur;
+		}
+	}
+
+	return null;
+}
