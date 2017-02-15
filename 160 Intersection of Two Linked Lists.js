@@ -67,3 +67,19 @@ var getIntersectionNode = function(headA, headB) {
 
     return null;
 };
+
+/**
+ * another solution use two pointer, travel through both two linked list
+ * */
+
+var getIntersectionNodeII = function (headA, headB) {
+    var a = headA;
+    var b = headB;
+
+    while(a !== b) {
+        a = a ? a.next : headB;
+        b = b ? b.next : headA;
+    }
+
+    return a;
+};
