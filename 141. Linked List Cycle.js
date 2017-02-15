@@ -16,9 +16,26 @@
  * @param {ListNode} head
  * @return {boolean}
  */
+
+/**
+ * Will try to resolve this by hash table
+ * */
 var hasCycle = function(head) {
-    if(!head || !head.next) {
-        return null;
+    var hashTable = {};
+
+    while (head) {
+        // when the node value is exist in the table
+        // we need to make a compare between the existed reference and new reference
+        // If they are the same we can return true
+        // else the same node value's reference will be replaced.
+        if(hashTable.hasOwnProperty(head.val) && hashTable[head.val] === head) {
+            return true;
+        }
+
+        // here we need to save the reference of current head into the hash table
+        hashTable[head.val] = head;
+        head = head.next;
     }
 
+    return false;
 };
