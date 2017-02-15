@@ -45,26 +45,22 @@ var hasCycle = function(head) {
  * */
 
 var hasCycleTwoPointers = function(head) {
-    if(head === null || head.next === null) {
-        return false;
-    }
-
-    var faster = head.next;
+    var faster = head;
     var slower = head;
 
-    while(faster && slower) {
-        if(faster.val === slower.val) {
-            return true;
-        }
-
+    while(faster && faster.next) {
+        slower = slower.next;
         faster = faster.next;
 
-        if(!faster) {
+        if(!faster.next) {
             return false;
         }
 
         faster = faster.next;
-        slower = slower.next;
+
+        if(faster === slower) {
+            return true;
+        }
     }
 
     return false;
