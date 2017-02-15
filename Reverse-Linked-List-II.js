@@ -24,96 +24,31 @@
  * @return {ListNode}
  */
 var reverseBetween = function(head, m, n) {
-    if( m === n ) {
+    if(m >= n) {
         return head;
     }
 
-    // find a node with val
-    function find(val, lists) {
-        var currNode = lists;
+    var dummy = new ListNode(0);
+    dummy.next = head;
+    head = dummy;
 
-        while(currNode.val !== val) {
-            currNode = currNode.next;
-        }
-
-        return currNode;
+    // move head to m -1 node;
+    for(var i =0; i < m-1; i++) {
+        head = head.next;
     }
 
-    // find a previous value for given node
-    function findPrevious(val, lists) {
-        var currNode = lists;
-        while(currNode.next !== null && currNode.next.val !== val) {
-            currNode = currNode.next;
-        }
+    var pre = head.next;
+    var cur = pre.next;
 
-        return currNode;
+    for(i=0; i< n-m; i++) {
+        var tmp = cur.next;
+        cur.next = pre;
+        pre = cur;
+        cur = tmp;
     }
 
-    // get the length of the node
-    function getLength(nodeLists) {
-        var currNode = nodeLists;
-        while(currNode.next !== null) {
-            currNode = currNode.next;
-        }
-        return currNode.val;
-    }
+    head.next.next = cur;
+    head.next = pre;
 
-    // close node next with given val
-    function closeANode(val, list) {
-        var currList = list;
-        while( currList.next !== null ) {
-            if( currList.val === val ) {
-                currList.next = null;
-            }
-        }
-    }
-
-    // normal reverse a linked list function
-    function reverseLList (list) {
-        var cur = list,
-            next;
-
-        list = null;
-        while(cur) {
-            next = cur.next;
-            cur.next = list;
-
-            if(next) {
-                list = cur;
-                cur = next;
-            } else {
-                return cur;
-            }
-        }
-
-        return null;
-    }
-
-
-    var length = getLength(head);
-    var rangeHead = Object.assign( {}, find(m, head) );
-
-    if( n !== length ) {
-        // save rest list in to tail variable
-        var tail = Object.assign( {}, find(n+1, head) );
-    }
-
-    // set rangeEnd.next to null in rangeHead list
-    closeANode(n, rangeHead);
-    var reversedRangeHead = reverseLList(rangeHead);
-
-    if( m !== head.val ) {
-        var rangeHeadPrevious = findPrevious(m, head);
-        rangeHeadPrevious.next = null;
-        rangeHeadPrevious.next = reversedRangeHead;
-
-        if(tail) {
-            var recombinedListLastNode = find(m, reversedRangeHead);
-            recombinedListLastNode.next = tail;
-        } else {
-            return head;
-        }
-    } else {
-        return reversedRangeHead;
-    }
+    return dummy.next;
 };
