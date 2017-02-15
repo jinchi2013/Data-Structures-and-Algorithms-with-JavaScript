@@ -39,3 +39,33 @@ var hasCycle = function(head) {
 
     return false;
 };
+
+/**
+ * another solution with fast and slow pointers
+ * */
+
+var hasCycleTwoPointers = function(head) {
+    if(head === null || head.next === null) {
+        return false;
+    }
+
+    var faster = head.next;
+    var slower = head;
+
+    while(faster && slower) {
+        if(faster.val === slower.val) {
+            return true;
+        }
+
+        faster = faster.next;
+
+        if(!faster) {
+            return false;
+        }
+
+        faster = faster.next;
+        slower = slower.next;
+    }
+
+    return false;
+};
