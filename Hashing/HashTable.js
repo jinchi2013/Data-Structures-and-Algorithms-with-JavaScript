@@ -9,7 +9,7 @@ function HashTable () {
         }
 
         return hash % 37;
-    }
+    };
 
     function put(key, value) {
         var position = loseloseHashCode(key);
