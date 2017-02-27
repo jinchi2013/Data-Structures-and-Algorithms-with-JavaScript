@@ -1,34 +1,46 @@
-function HashTable () {
+function HashTable() {
+
     var table = [];
 
-    // private method of hash table
-    var loseloseHashCode = function(key) {
+    var loseloseHashCode = function (key) {
         var hash = 0;
-        for(var i = 0; i < key.length ; i++) {
+        for (var i = 0; i < key.length; i++) {
             hash += key.charCodeAt(i);
         }
-
         return hash % 37;
     };
 
-    function put(key, value) {
-        var position = loseloseHashCode(key);
-        console.log(`${position}-${key}`);
+    var djb2HashCode = function (key) {
+        var hash = 5381;
+        for (var i = 0; i < key.length; i++) {
+            hash = hash * 33 + key.charCodeAt(i);
+        }
+        return hash % 1013;
+    };
+
+    var hashCode = function (key) {
+        return loseloseHashCode(key);
+    };
+
+    this.put = function (key, value) {
+        var position = hashCode(key);
+        console.log(position + ' - ' + key);
         table[position] = value;
-    }
+    };
 
-    function get(key) {
-        return table[loseloseHashCode(key)];
-    }
+    this.get = function (key) {
+        return table[hashCode(key)];
+    };
 
-    function remove(key) {
-        table[loseloseHashCode(key)] = undefined;
-    }
+    this.remove = function(key){
+        table[hashCode(key)] = undefined;
+    };
 
-    return {
-        get : get,
-        put : put,
-        remove : remove
-    }
+    this.print = function () {
+        for (var i = 0; i < table.length; ++i) {
+            if (table[i] !== undefined) {
+                console.log(i + ": " + table[i]);
+            }
+        }
+    };
 }
-
