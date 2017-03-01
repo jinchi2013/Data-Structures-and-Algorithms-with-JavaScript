@@ -145,7 +145,7 @@ function LinkedList() {
 		}
 	}
 
-	return LinkedList;
+	return LinkedList2;
 
 
 }
