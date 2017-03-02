@@ -18,6 +18,9 @@
  * @return {number}
  */
 var minSubArrayLen = function(s, nums) {
+
+	// please note this is for a contiguous subarray !!!
+
 	if(nums.length === 0) {
 		return 0;
 	}
@@ -28,7 +31,7 @@ var minSubArrayLen = function(s, nums) {
 		res = nums.length + 1; 
 		// because the result could be the nums' length, so its starting value should be larger than length of the array
 		// 15 [1,2,3,4,5] as a example
-		
+
 	while(right < nums.length) {
 		while( sum < s && right < nums.length ) {
 			sum += nums[right++];
