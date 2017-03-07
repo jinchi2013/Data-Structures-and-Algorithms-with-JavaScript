@@ -31,20 +31,26 @@ Binary tree [1,2,3], return false.
  * @return {boolean}
  */
 var isValidBST = function(root) {
-	var smallerVal;
+	var smallerVal = -Infinity;
+	var result = true;
 
 	var InOrderTraverse = function(node, cb) {
-		if(node !== null) {
-			InOrderTraverse(root.left, cb);
-			cb();
-			InOrderTraverse(root.right, cb);
+		if(node !== null && result) {
+			InOrderTraverse(node.left, cb);
+			cb(node.val);
+			InOrderTraverse(node.right, cb);
 		}
 	};
 
-	var compareVal = function() {
-
+	var compareVal = function(value) {
+			if(value > smallerVal) {
+				smallerVal = value;
+			} else {
+					result = false;
+			}
 	}
 
-	InOrderTraverse(root);
-    
+	InOrderTraverse(root, compareVal);
+
+	return result;
 };
