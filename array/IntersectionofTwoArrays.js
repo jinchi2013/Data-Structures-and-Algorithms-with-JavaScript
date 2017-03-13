@@ -66,7 +66,7 @@ var intersection2 = function(nums1, nums2) {
 	}
 
 	return Object.keys(hashSet).reduce(function(arr, key) {
-		arr.push(parseInt(key));
+		arr.push(hashSet[key]);
 		return arr;
 	}, []);
 }
