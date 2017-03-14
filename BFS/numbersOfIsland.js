@@ -52,7 +52,7 @@ var numIslands = function(grid) {
 
     grid.forEach(function(row, y) {
     	row.forEach(function(element, x) {
-    		if(grid[y,x] === '1') {
+    		if(grid[y][x] === '1') {
     			bfs([{row: y, col: x}])
     			count++;
     		}

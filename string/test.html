@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>lala</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var DoublyLinkList = function() {
+	var Node = function(element) {
+		this.element = element;
+		this.next = null;
+		this.prev = null;
+	}
+
+	var head = null;
+	var tail = null;
+
+	this.prepend = function(element) {
+		var node = new Node(element);
+
+		if(!head) {
+			head = node;
+			tail = node;
+		} else {
+			node.next = head;
+			head.prev = node;
+			head = node;
+		}
+	}
+
+	this.remove = function(element) {
+		var current = head;
+		var previous;
+		if(!current) {
+			return false;
+		}
+
+		if(current.element === element) {
+			return false;
+		}
+
+		while(current && current.element !== element) {
+			previous = current;
+			current = current.next;
+		}
+
+		if(current.next === null) {
+			previous.next = null;
+			tail = previous;
+			return true;
+		}
+
+		// in the middle of list
+		previous.next = current.next;
+		current.next.prev = previous;
+
+		return true;
+	}
+
+	this.moveToHead = function(element) {
+		if(this.remove(element)){
+			this.prepend(element);
+		}
+	}
+
+	this.removeHead = function() {
+		var current = head;
+		head = null;
+		tail = null;
+
+		return current.element;
+	}
+
+	this.removeTail = function() {
+		var current = tail;
+		var previous = current.prev;
+
+		previous.next = null;
+		tail = previous;
+
+		return current.element;
+	}
+
+	this.getHead = function() {
+		return head;
+	}
+
+	this.getTail = function() {
+		return tail;
+	}
+}
+
+/**
+ * @param {number} capacity
+ */
+var LRUCache = function(capacity) {
+    this.capacity = capacity;
+    this.map = {};
+    this.history = new DoublyLinkList();
+    this.historyLen = 0;
+};
+
+/** 
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function(key) {
+	if(this.map.hasOwnProperty(key.toString())){
+		this.history.moveToHead(key);
+		return this.map[key];
+	} else {
+		return -1;
+	}
+};
+
+/** 
+ * @param {number} key 
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function(key, value) {
+
+    if(this.map.hasOwnProperty(key.toString())){
+    	this.history.moveToHead(key);
+    	this.map[key] = value;
+    } else if(this.capacity === 1 && this.capacity === this.historyLen) {
+		var removedKey = this.history.removeHead();
+		delete this.map[removedKey];
+		this.map[key] = value;
+	} else if(this.capacity === this.historyLen) {
+		var tailElement = this.history.removeTail();
+		delete this.map[tailElement];
+		this.map[key] = value;
+		this.history.prepend(key);
+    } else {
+    	this.history.prepend(key);
+    	this.map[key] = value;
+    	this.historyLen++;
+    }
+};
+
+/** 
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = Object.create(LRUCache).createNew(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
+
+var cache = new LRUCache(1);
+ 
+console.log(cache.put(2, 1));
+//console.log(cache.put(2, 2));
+console.log(cache.get(2));       // returns 1
+console.log(cache.put(3, 2));    // evicts key 2
+console.log(cache.get(2));       // returns -1 (not found)
+//console.log(cache.put(4, 4));    // evicts key 1
+console.log(cache.get(2));       // returns -1 (not found)
+console.log(cache.get(3));       // returns 3
+console.log(cache.get(4));       // returns 4
+
+</script>
+
+</body>
+</html>
