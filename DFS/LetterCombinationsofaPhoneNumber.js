@@ -48,8 +48,8 @@ var letterCombinations = function(digits) {
 
 		var letters = numToLetters[digits[i]];
 
-		for(var i = 0; i < letters.length; i++) {
-			dfs(digits, i+1, current+letters[i]);
+		for(var j = 0; j < letters.length; j++) {
+			dfs(digits, i+1, current+letters[j]);
 		}
 	}
 
