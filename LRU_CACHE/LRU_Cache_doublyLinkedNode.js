@@ -34,48 +34,51 @@ function LinkListedNode(key, val) {
 	this.next = this.prev = null;
 }
 
-function prepend(node, cache) {
-	if(!cache.head) {
-		// new node
-		cache.head = newNode;
-		cache.tail = newNode;
-	} else {
-		// prepend node
-		newNode.next = cache.head;
-		cache.head.prev = newNode;
-		cache.head = newNode;
-	}
-}
-
-function removeNode(node, cache) {
-	if(cache.historyLen === 1) {
-		cache.head = null;
-		cache.tail = null;
-	} else { // length >=2
-		if(node.next && node.prev) { // remove at the middle
-			node.prev.next = node.next;
-			node.next.prev = node.prev;
-		} else if(!node.prev && node.next) { //remove at the head
-			cache.head = node.next;
-			cache.head.prev = null;
-		} else if(!node.next && node.prev) { // remove at the tail
-			cache.tail = node.prev;
-			cache.tail.next = null;
-		}
-	}
-}
-
-function moveToHead(node, cache) {
-	prepend(node, cache);
-	removeNode(node, cache);
-}
-
 var LRUCache = function(capacity) {
     this.capacity = capacity;
     this.map = {};
     this.historyLen = 0;
     this.head = null;
     this.tail = null;
+    this.prepend = function prepend(node) {
+		if(!this.head) {
+			// new node
+			this.head = node;
+			this.tail = node;
+		} else {
+			// prepend node
+			node.next = this.head;
+			this.head.prev = node;
+			this.head = node;
+		}
+	};
+	this.removeNode = function removeNode(node) {
+		if(this.historyLen === 1) {
+			this.head = null;
+			this.tail = null;
+		} else { // length >=2
+			if(node.next && node.prev) { // remove at the middle
+				node.prev.next = node.next;
+				node.next.prev = node.prev;
+			} else if(!node.prev && node.next) { //remove at the head
+				this.head = node.next;
+				this.head.prev = null;
+			} else if(!node.next && node.prev) { // remove at the tail
+				this.tail = node.prev;
+				this.tail.next = null;
+			}
+		}
+
+		node.next = null;
+		node.prev = null;
+
+		return node;
+	};
+	this.moveToHead = function moveToHead(node) {
+		this.removeNode(node);
+		this.prepend(node);
+		
+	};
 };
 
 /** 
@@ -84,8 +87,10 @@ var LRUCache = function(capacity) {
  */
 LRUCache.prototype.get = function(key) {
 	if(this.map.hasOwnProperty(key.toString())){
-		moveToHead(this.map[key], this);
+		this.moveToHead(this.map[key]);
 		return this.map[key].val;
+	} else {
+		return -1;
 	}
 };
 
@@ -99,19 +104,26 @@ LRUCache.prototype.put = function(key, value) {
 
 	if(this.map.hasOwnProperty(key.toString())) {
 		//Update
-		remove(this.map[key], this)
+		this.removeNode(this.map[key])
 		this.map[key] = newNode;
-		prepend(newNode);
+		this.prepend(newNode);
+		console.log('updated:' +  this.map[key].val);
 	} else if(this.historyLen === this.capacity) {
 		// remove last and update
-		remove(this.tail, this);
-		prepend(newNode, this);
+
+		var tailNode = this.removeNode(this.tail);
+		delete this.map[tailNode.key];
+		this.prepend(newNode);
+		this.map[key] = newNode;
+		console.log('removeAndInsert:' + this.map[key].val);
 	} else {
 		// insert/prepend the new node to the list
 		this.map[key] = newNode;
-		this.length += 1;
-		prepend(newNode, this);
-};
+		this.historyLen += 1;
+		this.prepend(newNode);
+		console.log( 'Added newNode:' + this.map[key].val);
+	}
+}
 
 /** 
  * Your LRUCache object will be instantiated and called as such:
