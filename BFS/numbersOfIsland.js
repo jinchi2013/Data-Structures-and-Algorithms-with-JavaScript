@@ -46,8 +46,6 @@ var numIslands = function(grid) {
     	if(queue.length !== 0) {
     		bfs(queue);
     	}
-    	
-
     }
 
     grid.forEach(function(row, y) {
