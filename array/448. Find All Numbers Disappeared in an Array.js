@@ -25,10 +25,10 @@ var findDisappearedNumbers = function(nums) {
     for(var i=0; i<length; i++) {
         // -1 must be outside the Math.abs() method
         // or the index will be missing 1
-        var val = Math.abs(nums[i]) - 1;
+        var index = Math.abs(nums[i]) - 1;
 
-        if(nums[val] > 0) {
-            nums[val] = -nums[val];
+        if(nums[index] > 0) {
+            nums[index] = -nums[index];
         }
     }
 

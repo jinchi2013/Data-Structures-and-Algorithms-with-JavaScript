@@ -47,7 +47,7 @@ var findDuplicate_quicker = function(nums) {
         var index = Math.abs(nums[i]) - 1;
 
         if(nums[index] < 0) {
-            result.push(nums[i]);
+            result.push(Math.abs(nums[i]));
         } else {
             nums[index] = -nums[index];
         }
