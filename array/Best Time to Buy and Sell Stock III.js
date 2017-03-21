@@ -10,10 +10,10 @@ Design an algorithm to find the maximum profit. You may complete at most two tra
  * @return {number}
  */
 var maxProfit = function(prices) {
-    var hold1 = -Infinity;
-    var hold2 = -Infinity;
-    var release1 = 0;
-    var release2 = 0;
+    var hold1 = -Infinity; // the money we have after first buy
+    var hold2 = -Infinity; // the money we have after second buy
+    var release1 = 0; // the money we have after first sell
+    var release2 = 0; // the money we have after second sell
     
     prices.forEach(function(price){
         release2 = Math.max(release2, price+hold2);
