@@ -27,7 +27,7 @@ var letterCombinations = function(digits) {
 		'2': 'abc',
 		'3': 'def',
 		'4': 'ghi',
-		'5': 'jki',
+		'5': 'jkl',
 		'6': 'mno',
 		'7': 'pqrs',
 		'8': 'tuv',
@@ -40,7 +40,7 @@ var letterCombinations = function(digits) {
 		return res;
 	}
 
-	dfs(digits, i, current) {
+	function dfs(digits, i, current) {
 		if(i === digits.length) {
 			res.push(current);
 			return res;
