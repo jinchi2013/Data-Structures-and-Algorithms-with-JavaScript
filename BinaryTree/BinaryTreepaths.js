@@ -36,7 +36,7 @@ var binaryTreePaths = function(root) {
       if(node !== null) {
         var tmpPath = path + node.val + '->';
         
-        if(!node.left && !node.right) {
+        if(!node.left && !node.right) { // a leaf node has no right and left child node
           cb(tmpPath);
         }
         
