@@ -8,6 +8,13 @@ function isNum(num) {
 	return typeof num === 'number';
 }
 
+
+/*
+	The typeof object and array are both 'object'
+	the fastest way is to use Array.isArray([1,2,3]) => true
+	alternative way like Object.prototype.tostring([1,2,3]) => '[object Array]'
+	                     Object.prototype.tostring({a:1}) => '[object Object]'
+*/
 function isArray(arr) {
 	return typeof arr.length !== 'undefined' && !arr.hasOwnProperty('length');
 }
