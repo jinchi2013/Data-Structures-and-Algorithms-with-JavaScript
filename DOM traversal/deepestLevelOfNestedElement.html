@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+<ul>
+  <li>simple list1</li>
+</ul>
+<ul>
+	<li>
+		<ul>
+	        <li>elem1</li>
+	    </ul>
+    </li>
+</ul>
+<ul>
+  <li>Item:
+     <ol>
+       <li>Point:
+         <div>
+           <ul>
+             <li>elem1</li>
+           </ul>
+         </div>
+       </li>
+     </ol>
+  </li>
+  <li>elem2</li>
+</ul>
+
+<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+<script type="text/javascript">
+
+	var $eleArr = $('ul').find('ul:last');
+
+	var count = 0;
+
+	$eleArr.each(function(){
+		var $ele = $(this);
+		var c = 1;
+
+		while($ele.parent().prop('tagName') !== 'BODY'){
+			if($ele.parent().prop('tagName')=== 'UL' || $ele.parent().prop('tagName')=== 'OL') {
+				++c;
+			}
+
+			$ele = $ele.parent();
+		}
+
+		count = Math.max(count, c);
+	})
+
+	
+
+	console.log(count);
+</script>
+</body>
+</html>
