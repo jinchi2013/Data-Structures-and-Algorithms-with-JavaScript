@@ -22,8 +22,7 @@ Popocatepetl 5465   Mexico
 
 */
 
-var mountainsTableFactory = (function mountainsTableFactory(mountains) {
-	const titles = Object.keys(mountains[0]);
+var mountainsTableFactory = (function mountainsTableFactory() {
 	let cache = {};
 
 	function checkCache(title) {
@@ -64,8 +63,7 @@ var mountainsTableFactory = (function mountainsTableFactory(mountains) {
 		}, ''); 
 	}
 
-	function getTableLine(mountain) {
-		const titles = Object.keys(mountain);
+	function getTableLine(mountain, titles) {
 
 		return titles.reduce( (row, title) => {
 			row += mountain[title];
@@ -80,16 +78,17 @@ var mountainsTableFactory = (function mountainsTableFactory(mountains) {
 		}, '' )
 	}
 
-	function drawTableBody(mountains) {
-		return mountains.map( mountain => getTableLine(mountain) ).join('\n');
+	function drawTableBody(mountains, titles) {
+		return mountains.map( mountain => getTableLine(mountain, titles) ).join('\n');
 	}
 
-	function drawWholeTable() {
+	function drawWholeTable(mountains) {
+		const titles = Object.keys(mountains[0]);
 		return [
 			'',
 			getTheTitleRow(titles),
 			getTheDashLine(titles),
-			drawTableBody(mountains),
+			drawTableBody(mountains, titles),
 			''
 		].join('\n');
 	}
@@ -97,4 +96,4 @@ var mountainsTableFactory = (function mountainsTableFactory(mountains) {
 	return {
 		drawWholeTable: drawWholeTable
 	}
-})(mountains);
+})();
