@@ -12,33 +12,89 @@ var mountains = [
 
 name         height country
 ------------ ------ -------------
-Kilimanjaro    5895 Tanzania
-Everest        8848 Nepal
-Mount Fuji     3776 Japan
-Mont Blanc     4808 Italy/France
-Vaalserberg     323 Netherlands
-Denali         6168 United States
-Popocatepetl   5465 Mexico
+Kilimanjaro  5895   Tanzania
+Everest      8848   Nepal
+Mount Fuji   3776   Japan
+Mont Blanc   4808   Italy/France
+Vaalserberg  323    Netherlands
+Denali       6168   United States
+Popocatepetl 5465   Mexico
 
 */
 
-function mountainsTableFactory(mountains) {
+var mountainsTableFactory = (function mountainsTableFactory(mountains) {
 	const titles = Object.keys(mountains[0]);
-	const minNameColLength = getMinColumeWith('name');
-	const minHeightColLength = getMinColumeWith('height');
-	const minCountryColLength = getMinColumeWith('country');
+	let cache = {};
+
+	function checkCache(title) {
+		if( cache.hasOwnProperty(title) ) {
+			return cache[title];
+		} else {
+			cache[title] = getMinColumeWith(title);
+			return cache[title];
+		}
+	}
 
 	function getMinColumeWith(string) {
 		return Math.max.apply(null, mountains.map( mountain => mountain[string].toString().length ))
 	}
 
 	function getTheTitleRow(titleArray) {
-		
+		return titleArray.reduce( (cate, title) => {
+			cate += title;
+			for(let i = 0; i< ( checkCache(title) - title.length); i++ ) {
+				cate += " ";
+			}
+
+			cate += "  ";
+
+			return cate;
+		}, '');
 	}
 
-	function getTheDashLine() {
+	function getTheDashLine(titleArray) {
+		return titleArray.reduce( (dash, title) => {
+			for(let i = 0; i< ( Math.max(checkCache(title), title.length) ); i++ ) {
+				dash += "-";
+			}
 
+			dash += "  ";
+
+			return dash;
+		}, ''); 
 	}
 
-	return mountainsTable;
-}
+	function getTableLine(mountain) {
+		const titles = Object.keys(mountain);
+
+		return titles.reduce( (row, title) => {
+			row += mountain[title];
+
+			for(let i = 0; i< ( Math.max(checkCache(title), title.length) - mountain[title].toString().length ); i++ ) {
+				row += " ";
+			}
+
+			row += "  ";
+
+			return row;
+		}, '' )
+	}
+
+	function drawTableBody(mountains) {
+		return mountains.map( mountain => getTableLine(mountain) ).join('\n');
+	}
+
+	function drawWholeTable() {
+		return [
+			'',
+			getTheTitleRow(titles),
+			getTheDashLine(titles),
+			drawTableBody(mountains),
+			''
+		].join('\n');
+	}
+
+	return {
+		drawWholeTable: drawWholeTable
+	}
+})(mountains);
