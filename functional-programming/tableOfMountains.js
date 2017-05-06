@@ -23,7 +23,7 @@ Popocatepetl 5465   Mexico
 */
 
 var mountainsTableFactory = (function mountainsTableFactory() {
-	let cache = {};
+	const cache = {};
 
 	function checkCache(title) {
 		if( cache.hasOwnProperty(title) ) {
@@ -60,7 +60,7 @@ var mountainsTableFactory = (function mountainsTableFactory() {
 			dash += "  ";
 
 			return dash;
-		}, ''); 
+		}, '');
 	}
 
 	function getTableLine(mountain, titles) {
