@@ -14,6 +14,18 @@
 */
 
 var globalVal = 'globalVal'
+function outerFunction() {
+  var outerVal = 'outerVal';
+
+  function innerFunction() {
+    var innerVal = 'innerVal'
+    return `${globalVal} + ${outerVal} + ${innerVal}`
+  }
+
+  console.log(innerFunction())
+}
+
+// what is the difference between above and below
 (function outerFunction() {
   var outerVal = 'outerVal';
 
@@ -24,18 +36,6 @@ var globalVal = 'globalVal'
 
   console.log(innerFunction())
 }())
-
-// what is the difference between above and below
-// function outerFunction() {
-//   var outerVal = 'outerVal';
-//
-//   function innerFunction() {
-//     var innerVal = 'innerVal'
-//     return `${globalVal} + ${outerVal} + ${innerVal}`
-//   }
-//
-//   console.log(innerFunction())
-// }
 
 // What if the outer function is returned,
 // the returned function will keep the state of the outer function
@@ -86,3 +86,5 @@ var globalVal = 'globalVal'
   myOuter.innerFunction_2('newOuterVal');
   console.log(myOuter.innerFunction_1('innerParam-2'));
 }())
+
+// Closure's issue in for loop

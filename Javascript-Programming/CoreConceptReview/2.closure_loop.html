@@ -1,0 +1,20 @@
+<!doctype>
+<html>
+  <head></head>
+  <body>
+    <div>
+      <button>0</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+    </div>
+    <script>
+      var bottons = document.querySelectorAll('button');
+      for(var i  = 0; i <bottons.length; i++) {
+        bottons[i].addEventListener('click', function(){
+          console.log(i);
+        })
+      }
+    </script>
+  </body>
+</html>
