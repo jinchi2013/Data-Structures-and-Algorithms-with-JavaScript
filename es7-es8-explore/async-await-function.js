@@ -64,3 +64,16 @@ function wrapperForAsyncFunc() {
     console.log(result1, result2);
   })
 }
+
+/*
+  Use fetch as example
+*/
+async function fetchJson(url) {
+  try {
+      let response = await fetch(url);
+      let text = await request.text();
+      return JSON.parse(text);
+  } catch (e) {
+      console.log(`ERROR: ${e.stack}`)
+  }
+}
