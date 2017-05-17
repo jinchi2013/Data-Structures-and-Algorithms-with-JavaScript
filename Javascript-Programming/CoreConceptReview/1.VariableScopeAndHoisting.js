@@ -48,7 +48,7 @@ var val4 = 'globel';
 (function(){
 
   var val5 = 'cj'
-  function val5 () {
+  function val5(){
     console.log('cj')
   }
   console.log(typeof val5)
