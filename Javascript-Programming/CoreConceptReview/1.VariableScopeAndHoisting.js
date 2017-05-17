@@ -11,7 +11,7 @@ function showGlobalVar() {
 console.log(val1) //
 showGlobalVar() //
 
-funciton withOutDeclared() {
+function withOutDeclared() {
   val2 = 'Cal'; // use a variable in the function without declaration, it is global then
   console.log(val2);
 }
@@ -45,7 +45,7 @@ var val4 = 'globel';
   }
 }())
 
-(funciton(){
+(function(){
 
   var val5 = 'cj'
   function val5 () {
