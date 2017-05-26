@@ -17,6 +17,15 @@
         })
       }
     }())
+
+    ( function (){
+      const arr = [];
+      for (var i=0; i < 3; i++) {
+          arr.push(() => i);
+      }
+      const result = arr.map(x => x());
+      console.log(result);
+    }() )
     </script>
   </body>
 </html>
