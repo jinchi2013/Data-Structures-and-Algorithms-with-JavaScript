@@ -88,3 +88,5 @@ function outerFunction() {
 }())
 
 // Closure's issue in for loop
+
+//Every i in the bodies of the three arrow functions refers to the same binding, which is why they all return the same value.
