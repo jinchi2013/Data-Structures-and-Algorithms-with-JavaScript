@@ -79,8 +79,8 @@ async function fetchJson(url) {
 }
 
 /*
-  A little summary 
-    - the result of an async function is always a Promise p. 
+  A little summary
+    - the result of an async function is always a Promise p.
       That Promise is created when starting the exection of the async function
     - The body is executed. Execution may finish permanently via return ro throw.
       Or it may finish temporarily via await; in which case execution will usually continue later on.
@@ -111,8 +111,8 @@ async function downloadContent(urls) {
     Two issue of above
       - The result is now an Array of Promises, not an Array of strings
       - The work performed by the callbacks isn't finished once map() is finished
-        Because await only pauses the surrounding arrow function and 
-        httpGet() is resolved asynchronously. 
+        Because await only pauses the surrounding arrow function and
+        httpGet() is resolved asynchronously.
         That means you can’t use await to wait until downloadContent() is finished.
   */
 }
@@ -154,14 +154,14 @@ async function downloadContent(urls) {
 
 /*
   forEach, for-of loop, in parallel await the final result
-*/ 
+*/
 async function logContent(urls) {
     urls.forEach(async url => {
         const content = await httpGet(url);
         console.log(content);
     });
     /*
-      Promise returned by httpGet() is resolved asynchronously, 
+      Promise returned by httpGet() is resolved asynchronously,
       which means that the callbacks are not finished when forEach() returns.
       As a consequence, you can’t await the end of logContent().
     */
@@ -178,38 +178,15 @@ async function logContent(urls) {
 
 // here is the parallel version
 async function logContent(urls) {
-  await Promise.all( 
-    urls.map( 
+  await Promise.all(
+    urls.map(
       async url => {
         const content = await httpGet(url);
         console.log(content);
   }))
 }
 /*
-  map() is used to create an Array of Promises. 
+  map() is used to create an Array of Promises.
   We are not interested in the results they fulfill, 
   we only await until all of them are fulfilled
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
