@@ -24,8 +24,8 @@ function longest_common_substring(w1, w2) {
     .forEach((row, index) => {
       result[index] = Array(w2.length).fill(0)
     })
-  let startIndex = null
   let endIndex = null
+  let maxLength = 0
 
   for (let i = 0; i < w1.length; ++i) {
     for(let j = 0; j < w2.length; ++j) {
