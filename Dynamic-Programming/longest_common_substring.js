@@ -19,26 +19,32 @@ g 0 0 0 0 0
 */
 
 function longest_common_substring(w1, w2) {
-  let result = Array(w1.length)
-    .fill(0)
-    .forEach((row, index) => {
-      result[index] = Array(w2.length).fill(0)
-    })
-  let endIndex = null
-  let maxLength = 0
-
+  var result = Array(w1.length)
+  var endIndex = null
+  var maxLength = 0
   for (let i = 0; i < w1.length; ++i) {
+    result[i] = Array(w2.length).fill(0)
     for(let j = 0; j < w2.length; ++j) {
       if (w1[i] === w2[j]) {
-        
         if (i === 0 || j === 0) {
           result[i][j] = 1
         } else {
           result[i][j] = result[i-1][j-1] + 1
         }
+
+        if (result[i][j] > maxLength) {
+          maxLength = result[i][j]
+          endIndex = i
+        }
       }
     }
   }
 
-  return result
+  return {
+    endIndex,
+    maxLength,
+    lcs: maxLength !== 0 ? w1.substring(endIndex - maxLength + 1, endIndex+1) : null
+  }
 }
+
+console.log(longest_common_substring('12334', '33'))
