@@ -43,7 +43,9 @@ function longest_common_substring(w1, w2) {
   return {
     endIndex,
     maxLength,
-    lcs: maxLength !== 0 ? w1.substring(endIndex - maxLength + 1, endIndex+1) : null
+    lcs: maxLength !== 0
+      ? w1.substring(endIndex - maxLength + 1, endIndex+1)
+      : null
   }
 }
 
