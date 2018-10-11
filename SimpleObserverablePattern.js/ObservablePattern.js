@@ -17,7 +17,7 @@ ObservablePattern.prototype.unsubscribe = function unsubscribe(fn_name) {
 
 ObservablePattern.prototype.fire = function fire(value) {
 
-	if(this.null !== value) {
+	if(this.value !== null) {
 		this.observables.forEach(function eachObservableFn(obj){
 			obj.fn(value);
 		});
@@ -25,4 +25,3 @@ ObservablePattern.prototype.fire = function fire(value) {
 		this.value = value;
 	}
 }
-
