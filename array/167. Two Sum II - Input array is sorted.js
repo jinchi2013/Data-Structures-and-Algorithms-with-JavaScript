@@ -25,7 +25,7 @@
  *
  * use two pointer, start from both side of the array
  */
-twoSum = function(numbers, target) {
+ function twoSum(numbers, target) {
     if(numbers===null || numbers.length < 1) {
         return null;
     }
