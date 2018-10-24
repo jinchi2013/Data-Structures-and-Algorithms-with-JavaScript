@@ -20,7 +20,9 @@ function shuffle_n2 (array){
 // Second with complexity O(n);
 
 function shuffle(array) {
-	var m = array.length, t, i;
+	var m = array.length, 
+		t, 
+		i;
 
 	// While there remain elements to shuffle
 	while(m){
