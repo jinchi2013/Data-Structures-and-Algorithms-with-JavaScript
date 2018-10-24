@@ -13,4 +13,4 @@ function solution(arr, n) {
   return max
 }
 
-solution([1,3,4,3,7,32,10,99], 2)
+solution([1,3,4,3,7,32,10,99], 2) // => 32
