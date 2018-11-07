@@ -47,8 +47,7 @@ var removeDuplicates = function(nums) {
   // var a = new Set(nums)
   // nums.length = 0
   // return nums.push(...a.values()).length
-  
-  
+
   let lastUniIdx = 0;
   for (let i=1; i<nums.length; i++) {
       if (nums[i-1] !== nums[i]) {
