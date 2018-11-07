@@ -29,6 +29,11 @@ Could you do it in-place with O(1) extra space?
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var rotate = function(nums, k) {
+  /**
+   * [1,2,3,4]
+   * if I want to remove 
+   * 
+  */
   const tail = nums.splice( nums.length -k, k)
   Array.prototype.unshift.apply(nums, tail)
 };
