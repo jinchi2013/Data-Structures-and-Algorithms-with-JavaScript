@@ -43,6 +43,9 @@ for (int i = 0; i < len; i++) {
  * @param {number[]} nums
  * @return {number}
  */
+
+
+// remove the duplicates in-place
 var removeDuplicates = function(nums) {
   // var a = new Set(nums)
   // nums.length = 0

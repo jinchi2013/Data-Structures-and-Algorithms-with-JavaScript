@@ -16,6 +16,11 @@
   Output: 6
   Explanation:  After 6 moves, the array could be [3, 4, 1, 2, 5, 7].
   It can be shown with 5 or less moves that it is impossible for the array to have all unique values.
+
+  Note:
+
+  0 <= A.length <= 40000
+  0 <= A[i] < 40000
  * 
  */
 
@@ -43,23 +48,27 @@
 // };
 
 var minIncrementForUnique = function(A) {
-  let dp = Array(40000).fill(0), ret = 0, max = Math.max(...A), key = Math.min(...A);
-  A.forEach(n => dp[n] += 1)
-  
-  while (key < max) {
-     let new_key = key + 1;
-      if (dp[key] > 1) {
-          let overflow = dp[key] - 1;
-          dp[new_key] += overflow;
-          ret += overflow;
-      }
-      key = new_key;
+  let dp = Array(40000).fill(0),
+    max = Math.max(...A),
+    key = Math.min(...A),
+    count = 0
+
+  A.forEach(n => dp(n) += 1)
+
+  while(key < max) {
+    let new_key = key + 1
+    if (dp[key] > 1) {
+      let overflow = dp[key] - 1
+      dp[new_key] += overflow
+      count += overflow
+    }
+    key = new_key
   }
-  
-  if  (dp[max] > 1) {
-      let n = dp[max];
-      let head = 0, tail = n - 1;
-      ret += (head + tail) * n / 2; 
+
+  if (dp[max] > 1) {
+    let n = dp[max]
+    count += (n - 1) * n / 2
   }
-  return ret;
+
+  return count
 };
