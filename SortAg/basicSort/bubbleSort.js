@@ -12,7 +12,7 @@ function bubbleSort(arr) {
   return arr
 }
 
-const arr = [0, 1, 4, 2, 54, 100, 89, 99]
+const arr = [1, 0, 4, 2, 54, 44, 100, 89, 99, 2]
 console.log(arr)
 console.log(bubbleSort(arr))
 
