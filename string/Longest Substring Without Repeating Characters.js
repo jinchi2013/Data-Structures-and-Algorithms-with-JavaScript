@@ -20,19 +20,17 @@ var lengthOfLongestSubstring = function(s) {
     var i = 0; // pointer one
     var j = 0; // pointer two
     var result = 0;
-    var length = s.length;
 
     while(j < s.length && i < s.length) {
-		if(!set.hasOwnProperty(s.charAt(j))) {
-			set[s.charAt(j)] = 1;
-			++j;
-			result = Math.max(result, j-i);
-		} else {
-			delete set[s.charAt(i)];
-			++i;
-		}
+      if(!set.hasOwnProperty(s.charAt(j))) {
+        set[s.charAt(j)] = 1;
+        ++j;
+        result = Math.max(result, j-i);
+      } else {
+        delete set[s.charAt(i)];
+        ++i;
+      }
     }
 
     return result;
-    
 }
