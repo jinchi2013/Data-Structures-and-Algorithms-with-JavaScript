@@ -77,6 +77,7 @@ var pancakeSort = function(A) {
       --loop
     }
   }
+  console.log(A)
   return results
 }
 
