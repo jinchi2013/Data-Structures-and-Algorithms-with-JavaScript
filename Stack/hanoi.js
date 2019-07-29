@@ -9,8 +9,8 @@ const A = Stack([1, 2, 3])
 const B = Stack()
 const C = Stack()
 
-const resolveHanoi = ({ n, from, to, help }) => {
-  for (let i = 0; i < n; ++i) {
+const resolveHanoi = ({ from, to, help }) => {
+  for (let i = 0; i < from.size(); ++i) {
     if (to.isEmpty()) {
       to.push(from.pop())
       continue
@@ -30,4 +30,4 @@ const resolveHanoi = ({ n, from, to, help }) => {
   }
 }
 
-// resolveHanoi({n: 3, from: A, to: C, help: B})
+// resolveHanoi({from: A, to: C, help: B})
