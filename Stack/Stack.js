@@ -24,6 +24,14 @@ function Stack() {
 		},
 		toString: function(){
 			return items.toString();
+		},
+		insertItems: function (i) {
+			if (i) {
+				items = [
+					...items,
+					...i
+				]
+			}
 		}
 	}
 }
