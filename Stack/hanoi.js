@@ -1,33 +1,32 @@
 const Stack = require('./Stack')
 
-// 3 peg
-// A [ 1, 2, 3 ]
-// B []
-// C []
-
-const A = Stack([1, 2, 3])
-const B = Stack()
-const C = Stack()
-
-const resolveHanoi = ({ from, to, help }) => {
-  for (let i = 0; i < from.size(); ++i) {
-    if (to.isEmpty()) {
-      to.push(from.pop())
-      continue
-    }
-
-    if (from.peek() > to.peek() && (from.peek() < help.peek() || help.isEmpty())) {
-      help.push(from.pop())
-      continue
-    }
-
-    if (from.peek() > to.peek() && from.peek() > help.peek()) {
-      if (to.peek() < help.peek()) {
-        help.push(to.pop())
-        to.push(from.pop())
-      }
-    }
+var solveHanoi = function(numDisks, fromPeg, toPeg, helper) {
+  if (numDisks === 0) return
+  if (numDisks === 1) {
+    toPeg.push(fromPeg.pop())
+  } else {
+    solveHanoi(numDisks - 1, fromPeg, helper, toPeg)
+    toPeg.push(fromPeg.pop())
+    solveHanoi(numDisks - 1, helper, toPeg, fromPeg)
   }
-}
+};
 
-// resolveHanoi({from: A, to: C, help: B})
+// (function () {
+//   const a = Stack(3, 2, 1)
+//   const b = Stack()
+//   const c = Stack()
+//   solveHanoi(3, a, c, b)
+//   console.log('a: ', a.toString())
+//   console.log('b: ', b.toString())
+//   console.log('c: ', c.toString())
+// })()
+
+(function () {
+  const a = Stack(5, 4, 3, 2, 1)
+  const b = Stack()
+  const c = Stack()
+  solveHanoi(5, a, c, b)
+  console.log('a: ', a.toString())
+  console.log('b: ', b.toString())
+  console.log('c: ', c.toString())
+})()

@@ -1,5 +1,5 @@
 function Stack() {
-  let items = [];
+  let items = [...arguments];
   return {
     push: function(element) {
       items.push(element);
