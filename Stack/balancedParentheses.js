@@ -2,24 +2,17 @@ const Stack = require('./Stack')
 
 const balancedParentheses = str => {
   const checker = Stack()
-  let result
-  Array.from(str).forEach( char => {
+  for (let char of Array.from(str)) {
     if (char === '[' || char === '(' || char === '{') {
       checker.push(char)
-      console.log(checker.toString())
+    } else if ((checker.peek() === '[' && char === ']') || (checker.peek() === '{' && char === '}') || (checker.peek() === '(' && char === ')')) {
+      checker.pop()
+    } else {
+      return false
     }
-    if (char === ']' || char === ')' || char === '}') {
-      if (checker.peek() === char) {
-        checker.pop()
-      } else {
-        result = false
-        return false
-      }
-    }
-    result = true
-  })
+  }
 
-  return result
+  return true
 }
 
 console.log(balancedParentheses('[()]{}{[()()]()}')) // => true
