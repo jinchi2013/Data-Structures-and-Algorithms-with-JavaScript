@@ -18,7 +18,7 @@ function selectionSort (arr) {
 }
 
 const arr = [1, 0, 4, 2, 54, 100, 89, 99, 2, 1]
+selectionSort(arr)
 console.log(arr)
-console.log(selectionSort(arr))
 
 module.export = selectionSort

@@ -1,15 +1,15 @@
-function insertionSort (arr) {
-  let temp
-  let inner
+const { swap } = require('./../utils')
 
-  for(let outer = 1; outer <= arr.length -1; ++outer) {
-    temp = arr[outer]
-    inner = outer
-    while(inner > 0 && (arr[inner - 1] >= temp)) {
-      arr[inner] = arr[inner - 1]
-      --inner
+function insertionSort (arr) {
+  for (let i = 0; i < arr.length; ++i) {
+    let temp = arr[i]
+    let j = i - 1
+    while(j >= 0 && arr[j] > temp) {
+      arr[j + 1] = arr[j]
+      --j
     }
-    arr[inner] = temp
+
+    arr[j+1] = temp
   }
 
   return arr
@@ -19,3 +19,4 @@ function insertionSort (arr) {
 const arr = [22, 1, 4, 2, 54, 100, 89, 99]
 console.log(arr)
 console.log(insertionSort(arr))
+
