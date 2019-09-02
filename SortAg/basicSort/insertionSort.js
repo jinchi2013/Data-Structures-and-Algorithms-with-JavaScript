@@ -1,5 +1,3 @@
-const { swap } = require('./../utils')
-
 function insertionSort (arr) {
   for (let i = 0; i < arr.length; ++i) {
     let temp = arr[i]
