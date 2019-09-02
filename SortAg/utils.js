@@ -15,7 +15,7 @@ function partition (arr, left, right) {
       --right
     }
 
-    if (right > left) {
+    if (right >= left) {
       const temp = arr[right]
       arr[right] = arr[left]
       arr[left] = temp
@@ -24,8 +24,17 @@ function partition (arr, left, right) {
     }
   }
 
+  // return {
+  //   left,
+  //   right,
+  //   arr
+  // }
+
   return left
 }
 
 exports.swap = swap
 exports.partition = partition
+
+// const arr = [2,1,4,3,11,3]
+// console.log(partition(arr, 0, 5))
