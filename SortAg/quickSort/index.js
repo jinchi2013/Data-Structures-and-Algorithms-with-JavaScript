@@ -20,3 +20,7 @@ function quickSortHelper (arr, left, right) {
 
   return arr
 }
+
+var arr = [2,4,1,12,11,0]
+console.log(arr)
+console.log(quickSort(arr))
