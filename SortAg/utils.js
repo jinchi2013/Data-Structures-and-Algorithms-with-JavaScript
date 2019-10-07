@@ -5,13 +5,13 @@ function swap(arr, index1, index2) {
 }
 
 function partition (arr, left, right) {
-  const median = Math.floor((left + right) / 2)
+  var median = arr[Math.floor((left + right) / 2)]
   while (right >= left) {
-    while (arr[left] < arr[median]) {
+    while (arr[left] < median) {
       ++left
     }
 
-    while (arr[right] > arr[median]) {
+    while (arr[right] > median) {
       --right
     }
 
@@ -23,12 +23,6 @@ function partition (arr, left, right) {
       --right
     }
   }
-
-  // return {
-  //   left,
-  //   right,
-  //   arr
-  // }
 
   return left
 }
