@@ -3,7 +3,6 @@ const { Deque } = require('./Queue')
 function palindromeChecker (str) {
   const strDq = Deque(...Array.from(str.toLowerCase().replace(/[^a-zA-Z]/g, '')))
   while (!strDq.isEmpty()) {
-    if (strDq.peekFront())
     if (strDq.peekFront() === strDq.peekBack()) {
       if (strDq.size() === 1) {
         return true
