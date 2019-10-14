@@ -16,4 +16,5 @@ function medianQuickSelect (arr) {
 }
 
 var array = [1,3,3,-2,3,14,7,8,1,2,2]
+
 console.log(medianQuickSelect(array))
