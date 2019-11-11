@@ -11,10 +11,17 @@ function quickSelectInPlace (arr, start, end, k) {
   }
 }
 
-function medianQuickSelect (arr) {
-  return quickSelectInPlace(arr, 0, arr.length - 1, Math.floor(arr.length / 2))
+function medianQuickSelect (arr, k) {
+  return quickSelectInPlace(arr, 0, arr.length - 1, k)
 }
 
-var array = [1,3,3,-2,3,14,7,8,1,2,2]
+var arr = [1,2,3,4,5,6,7]
 
-console.log(medianQuickSelect(array))
+console.log(medianQuickSelect(arr, 1))
+console.log(medianQuickSelect(arr, 2))
+console.log(medianQuickSelect(arr, 3))
+console.log(medianQuickSelect(arr, 5))
+
+var arr1 = [1,3,3,-2,3,14,7,8,1,2,2]
+
+console.log(medianQuickSelect(arr1))

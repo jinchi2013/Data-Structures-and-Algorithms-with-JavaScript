@@ -9,12 +9,12 @@ function quickSortHelper (arr, left, right) {
   if (arr.length > 1) {
     median = partition(arr, left, right)
 
-    if (left < median - 1) {
+    if (left < median) {
       quickSortHelper(arr, left, median - 1)
     }
 
     if (right > median) {
-      quickSortHelper(arr, median, right)
+      quickSortHelper(arr, median + 1, right)
     }
   }
 

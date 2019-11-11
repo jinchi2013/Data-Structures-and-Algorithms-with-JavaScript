@@ -24,11 +24,11 @@ function partition (arr, left, right) {
     }
   }
 
-  return left
+  return left - 1
 }
 
 exports.swap = swap
 exports.partition = partition
 
-// const arr = [2,1,4,3,11,3]
-// console.log(partition(arr, 0, 5))
+const arr = [2,1,4,3,11,3]
+console.log(partition(arr, 0, 5))
