@@ -24,7 +24,7 @@ function partition (arr, left, right) {
     }
   }
 
-  return left
+  return left - 1
 }
 
 exports.swap = swap
