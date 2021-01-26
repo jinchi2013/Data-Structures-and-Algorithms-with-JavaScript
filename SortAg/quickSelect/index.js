@@ -11,8 +11,8 @@ function quickSelectInPlace (arr, start, end, k) {
   }
 }
 
-function medianQuickSelect (arr) {
-  return quickSelectInPlace(arr, 0, arr.length - 1, 3)
+function medianQuickSelect (arr, k = 0) {
+  return quickSelectInPlace(arr, 0, arr.length - 1, k)
 }
 
 var arr = [1,2,3,4,5,6,7]
