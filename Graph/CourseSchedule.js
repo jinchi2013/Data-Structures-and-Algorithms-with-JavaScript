@@ -64,7 +64,7 @@ Constraints:
       so as long as there is not other point refer to 2 in the stack
       we can say there is no loop for the path
   */
-  const visited = new Set();
+  const visited = new Set(); // Use visited array to record path that has been verified
   // Use a stack to keep track the path of current graph
   const hasCycle = (i, stack = []) => {
       if (visited.has(i)) {
