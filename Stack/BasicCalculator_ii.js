@@ -31,6 +31,14 @@ Constraints:
  * @param {string} s
  * @return {number}
  */
+
+/**
+ * test cases like '30*1 + 2 /10 '
+ * 1. start the handle + / - only when current char is not digit
+ * 2. need specical care about the trail space, which needs to be handled as "operator" instead of just ignoring
+ * 3. Use Math.trunc to get just the integer part from the digit
+ */
+
  var calculate = function(s) {
   let cn = 0
   let operator = '+'
