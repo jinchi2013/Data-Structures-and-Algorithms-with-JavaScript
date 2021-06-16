@@ -1,5 +1,5 @@
 /**
- * Given a string s which represents an expression, evaluate this expression and return its value. 
+ * Given a string s which represents an expression, evaluate this expression and return its value.
 
 The integer division should truncate toward zero.
 
@@ -35,14 +35,14 @@ Constraints:
   let cn = 0
   let operator = '+'
   const stack = []
-  
+
   for (let i = 0; i < s.length; ++i) {
       const ccr = s.charAt(i)
       if (ccr === ' ' && i !== s.length-1) continue
       if (ccr !== ' ' && isDigits(ccr)) {
           cn = cn * 10 + Number(ccr)
       }
-      
+
       if (!isDigits(ccr) || i === s.length - 1) {
           switch (operator) {
               case '+':
@@ -62,11 +62,11 @@ Constraints:
           cn = 0
       }
   }
-  
+
   function isDigits (v) {
       return !isNaN(Number(v))
   }
-  
+
   return stack.reduce((sum, n) => {
       sum += n
       return sum
