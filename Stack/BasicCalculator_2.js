@@ -38,8 +38,8 @@ Constraints:
  * 2. need specical care about the trail space, which needs to be handled as "operator" instead of just ignoring
  * 3. Use Math.trunc to get just the integer part from the digit
  */
-
- var calculate = function(s) {
+const { isDigit } = require('./helper')
+var calculate = function(s) {
   let cn = 0
   let operator = '+'
   const stack = []
@@ -71,12 +71,8 @@ Constraints:
       }
   }
 
-  function isDigits (v) {
-      return !isNaN(Number(v))
-  }
-
   return stack.reduce((sum, n) => {
       sum += n
       return sum
   }, 0)
-};
+}

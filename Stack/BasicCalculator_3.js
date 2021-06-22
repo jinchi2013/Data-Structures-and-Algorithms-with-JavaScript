@@ -42,11 +42,11 @@ Constraints:
  * @param {string} s
  * @return {number}
  */
+const { isDigit } = require('./helper')
 let index = 0 // index as point to loop record the position of the char
 var calculate = function(s) {
   const n = s.length
   let num = 0 // current number
-  let result = 0
   let lastOperator = '+'
   const stack = []
 
@@ -85,8 +85,4 @@ var calculate = function(s) {
     sum += n
     return sum
   }, 0)
-}
-
-function isDigit (v) {
-  return !isNaN(Number(v))
 }
