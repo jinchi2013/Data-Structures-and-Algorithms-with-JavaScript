@@ -72,8 +72,39 @@ var heap = function(nums, k) {
   let result = 0
 
   for (let i = 0; i <= k; ++i) {
-    result = pq_extract_min(pq)
+    result = pq_extract_min(priorityQueue)
   }
 
   return result
 };
+
+/**
+ *
+ * @param {array base priorityQueue, length is n} pq
+ * @param {index in queue} index
+ * @param {example: kth smallest} count
+ * @param {value} x
+ *
+ * Given an array-based heap on n elements and a real number x, efficiently
+   determine whether the kth smallest element in the heap is greater than or equal
+   to x.
+ */
+
+function heapCompare (pq, index, count, x) {
+  // we will look at total K === count element in the queue
+  // so if count == 0 meaning we looked K elements already
+  // all of the K elements are smaller than x
+  /*
+    so we can say x is greater than Kth smallest element in heap
+  */
+  if (count <= 0 || i > pq.length) return count
+
+  if (pq[index] < x) { // if any x is smaller than pq[index] it mean x is smaller than Kth smallest element in heap
+    const leftChild = index * 2
+    const rightChild = leftChild + 1
+    count = heapCompare(pq, leftChild, count-1, x) // here since pq[index] < x, we looked one element, so the total elements will need to look is K-1
+    count = heapCompare(pq, rightChild, count, x)
+  }
+
+  return count
+}
