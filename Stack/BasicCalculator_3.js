@@ -53,7 +53,7 @@ var calculate = function(s) {
   while (index < n) {
     if (s.charAt(index) === '(') {
       index++
-      num = calculate(s)
+      num = calculate(s) // recurrsively handle the content of  "(" and ")"
     }
 
     while (index < n && isDigit(s.charAt(index))) {
@@ -73,9 +73,9 @@ var calculate = function(s) {
     num = 0
     if (index >= n) break
     if (s.charAt(index) != ')') {
-      lastOperator = s.charAt(index++)
+      lastOperator = s.charAt(index++) // renew lastOperator with current Index
       continue
-    } else if (s.charAt(index) === ')') {
+    } else if (s.charAt(index) === ')') { // finish handle the "(" and ")"
       index++
       break
     }
