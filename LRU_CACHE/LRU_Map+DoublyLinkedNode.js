@@ -25,14 +25,10 @@ cache.get(4);       // returns 4
 
 */
 
-/**
- * @param {number} capacity
- */
 var LRUCache = function(capacity) {
 	this.capacity = capacity
 	this.head = null
 	this.tail = null
-	this.size = 0
 	this.map = new Map()
 };
 
@@ -58,8 +54,7 @@ LRUCache.prototype.get = function(key) {
 LRUCache.prototype.put = function(key, value) {
 	if (!this.map.has(key)) {
 		const newNode = DLNode(key, value)
-		this.map.set(key, newNode)
-		if (this.size === 0) {
+		if (this.map.size === 0) {
 			this.head = newNode
 			this.tail = newNode
 		} else {
@@ -67,20 +62,20 @@ LRUCache.prototype.put = function(key, value) {
 			newNode.prev = this.tail
 			this.tail = newNode
 		}
-		this.size++
+		this.map.set(key, newNode)
 	} else {
 		const temp = this.map.get(key)
 		temp.val = value
 		this.moveToTail(temp)
 	}
 
-	if (this.size > this.capacity) {
+	if (this.map.size > this.capacity) {
 		this.removeHead()
 	}
 };
 
 LRUCache.prototype.moveToTail = function (node) {
-	if (node.next === null || this.size === 1) return
+	if (node.next === null || this.map.size === 1) return
 
 	if (node.prev === null) { // node is head
 		this.head = node.next
@@ -116,10 +111,3 @@ function DLNode (key, val) {
 		prev: null
 	}
 }
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * var obj = new LRUCache(capacity)
- * var param_1 = obj.get(key)
- * obj.put(key,value)
- */
