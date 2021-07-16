@@ -53,3 +53,14 @@ var findAllConcatenatedWordsInADict = function(words) {
 
   return res
 };
+
+var VeryNewBilityCode = (words) => words.filter(dfs(new Set(words)))
+
+const dfs = set => word => {
+  for (let i = 1; i < word.length; ++i) {
+    if (set.has(word.slice(0, i))) {
+      const suffix = word.slice(i)
+      return set.has(suffix) || dfs(set)(suffix)
+    }
+  }
+}
