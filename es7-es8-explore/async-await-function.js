@@ -60,7 +60,7 @@ function wrapperForAsyncFunc() {
     AsyncFunction1(),
     AsyncFunction2()
   ])
-  .then([result1, result2] => {
+  .then(([result1, result2]) => {
     console.log(result1, result2);
   })
 }
@@ -187,6 +187,6 @@ async function logContent(urls) {
 }
 /*
   map() is used to create an Array of Promises.
-  We are not interested in the results they fulfill, 
+  We are not interested in the results they fulfill,
   we only await until all of them are fulfilled
 */
