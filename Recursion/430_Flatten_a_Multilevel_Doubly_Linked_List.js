@@ -36,14 +36,14 @@
     
     ptr.next = flatten(child) // add child as ptr's next
     
-    while (ptr.next) {
-        ptr = ptr.next
-    }
     if (next) {
+        while (ptr.next) {
+            ptr = ptr.next
+        }
         next.prev = ptr
+
+        ptr.next = flatten(next)   
     }
-    
-    ptr.next = flatten(next)
     
     return head
 };
