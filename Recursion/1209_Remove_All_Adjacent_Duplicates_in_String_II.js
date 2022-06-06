@@ -4,6 +4,29 @@
  * @return {string}
  */
 
+// use a stack to count number of chars
+var removeDuplicates_stack = function(s, k) {
+    if (s.length < k) return s
+    
+    var stack = [1]
+    for (let i = 1; i < s.length; i++) {
+        if (s[i] !== s[i-1]) {
+            stack.push(1)
+        } else {
+            const count = stack.pop() + 1
+            if (count === k) {
+                const left_s = s.slice(0, i - k + 1)
+                const right_s = s.slice(i+1)
+                s = left_s + right_s
+                i = i - k
+            } else {
+                stack.push(count)
+            }
+        }
+    }
+    return s
+}
+
 // https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
 // result in out of memory
 // guessing pointer take a lot of memory
