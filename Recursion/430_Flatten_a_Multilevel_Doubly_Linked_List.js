@@ -12,7 +12,46 @@
  * @param {Node} head
  * @return {Node}
  */
- var flatten = function(head) {
+
+var flatten_single_recurrsion = function(head) {
+    var ptr = head
+
+    function flattenChild(ptr, next) {
+        var child = ptr.child
+        ptr.child = null
+        ptr.next = child
+        child.prev = ptr
+        ptr = child
+        
+        while (ptr) {
+            if (ptr.child) {
+                flattenChild(ptr, ptr.next)
+            }
+            if (!ptr.next) {
+                break
+            }
+            ptr = ptr.next
+        }
+        
+        if (next) {
+            ptr.next = next
+            next.prev = ptr   
+        }
+    }
+    
+    while (ptr) {
+        if (ptr.child) {
+            flattenChild(ptr, ptr.next)
+        }
+        ptr = ptr.next
+    }
+    
+    return head
+};
+
+
+// Each recurrsion seperate the list into two part, child and next
+var flatten = function(head) {
     if (head === null) {
         return head
     }
