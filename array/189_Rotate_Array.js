@@ -4,6 +4,7 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 
+// Two pointer to partially reverse the array
  const revNums = (nums, start, end) => {
     for (let i = start; i <= end; i++) {
         const temp = nums[start]
