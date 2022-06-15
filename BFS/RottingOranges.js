@@ -38,49 +38,56 @@ Constraints:
  * @return {number}
  */
 var orangesRotting = function(grid) {
-  let queue = []
-  let fresh = 0
-
-  for (let i = 0; i < grid.length; ++i) {
-    for (let j = 0; j < grid[0].length; ++j) {
-      if (grid[i][j] === 2) {
-        queue.push({x: i, y: j})
-      } else if (grid[i][j] === 1) {
-        ++fresh
-      }
-    }
-  }
-
-  let timestamp = 0
-  const xs = [0, 0, 1, -1]
-  const ys = [1, -1, 0, 0]
-
-  while (queue.length !== 0) {
-    let nextMinQueue = []
-    let hasMoreFresh = false
-    while (queue.length !== 0) {
-      const cur = queue.shift()
-      for (let i = 0; i < xs.length; ++i) {
-        const newX = cur.x + xs[i]
-        const newY = cur.y + ys[i]
-
-        if (newX >= 0 && newX < grid.length && newY >= 0 && newY < grid[0].length) {
-          if (grid[newX][newY] === 1) {
-            hasMoreFresh = true
-            grid[newX][newY] = 2
-            nextMinQueue.push({
-              x: newX,
-              y: newY
-            })
-            --fresh
+    
+  const R = grid.length
+  const C = grid[0].length
+  const queue = []
+  let freshCount = 0
+  
+  // find the rotten orange, push it into Q
+  for (let i = 0; i < R; i++) {
+      for (let j = 0; j < C; j++) {
+          if (grid[i][j] === 2) {
+              queue.push([i,j,0])
           }
-        }
+          if (grid[i][j] === 1) {
+              freshCount++
+          }
       }
-    }
-
-    queue = nextMinQueue
-    hasMoreFresh && ++timestamp
   }
-
-  return fresh === 0 ? timestamp : -1
-}
+  
+  if (freshCount === 0) {
+      return 0
+  }
+  
+  const directions = [
+      [1,0],
+      [-1,0],
+      [0,1],
+      [0,-1]
+  ]
+  
+  let result = -1
+  
+  while (queue.length !== 0) {
+      const [r, c, min] = queue.shift()
+      result = min
+      
+      for (let i = 0; i < directions.length; i++) {
+          const [xi, yi] = directions[i]
+          
+          const x = r + xi
+          const y = c + yi
+          
+          if (x < 0 || y < 0 || x === R || y === C || grid[x][y] === 2 || grid[x][y] === 0) {
+              continue
+          }
+          
+          grid[x][y] = 2
+          queue.push([x,y,min+1])
+          freshCount--
+      }
+  }
+  
+  return freshCount === 0 ? result : -1
+};
